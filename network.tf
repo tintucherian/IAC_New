@@ -19,18 +19,6 @@ resource "aws_subnet" "public_subnets" {
   ]
 }
 
-#creation of private subnet
-# resource "aws_subnet" "private_subnets" { 
-#  vpc_id     = aws_vpc.vpcmain.id
-#  cidr_block = var.private_subnet_cidr
-#  availability_zone = var.availability_zone
-#  tags = {
-#    Name = "Private Subnet"
-#  }
-#  depends_on = [
-#     aws_vpc.vpcmain
-#   ]
-# }
 
 #creation of internet gateway
 resource "aws_internet_gateway" "gw" {

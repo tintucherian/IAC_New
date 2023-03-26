@@ -1,13 +1,8 @@
-# data "aws_availability_zones" "available" {
-#     state = "available"
-# }
+
 
 #aws connection
 provider "aws" {
-  region = "ap-south-1"
-  #shared_credentials_files =["~/.aws/credentials"]
-  #access_key = var.aws_access_key
-  #secret_key = var.aws_secret_key
+  region = "ap-south-1" 
 }
 
 # EC2 instance creation
