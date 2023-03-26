@@ -1,8 +1,8 @@
 
-
 #aws connection
 provider "aws" {
-  region = "ap-south-1" 
+  region = "ap-south-1"
+ 
 }
 
 # EC2 instance creation
@@ -33,18 +33,36 @@ resource "aws_key_pair" "testkey" {
 resource "aws_security_group" "ssh_access" {
     name = "ssh-access"
     vpc_id = aws_vpc.vpcmain.id
-    ingress {
-        from_port =22
-        to_port = 22
-        protocol = "tcp"
-        cidr_blocks = ["49.207.210.44/32"]
-    } 
+    # ingress {
+    #     from_port =22
+    #     to_port = 22
+    #     protocol = "tcp"
+    #     cidr_blocks = ["49.207.210.44/32", "3.109.72.152/29", "13.127.70.136/29"]
+    # } 
     egress {
      from_port       = 0
      to_port         = 0
      protocol        = "-1"
      cidr_blocks     = ["0.0.0.0/0"]
     } 
+}
+
+resource "aws_security_group_rule" "rule4" {
+  type              = "ingress"
+  from_port         = 3000
+  to_port           = 3000
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.ssh_access.id
+}
+
+resource "aws_security_group_rule" "rule5" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks       = ["49.207.210.44/32", "3.109.72.152/29", "13.127.70.136/29"]
+  security_group_id = aws_security_group.ssh_access.id
 }
 
 #to get the public ip
